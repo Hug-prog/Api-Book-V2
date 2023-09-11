@@ -73,10 +73,12 @@ class BookVersionController extends APIBaseController
         }
 
         $book = $this->validationObject(Book::class, $request->book_id);
+
         $edition = $this->validationObject(
             Edition::class,
             $request->edition_id
         );
+
         $publisher = $this->validationObject(
             Publisher::class,
             $request->publisher_id
