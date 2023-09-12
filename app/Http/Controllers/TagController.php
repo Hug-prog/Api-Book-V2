@@ -32,7 +32,7 @@ class TagController extends Controller
 
         if (empty($checkTag->items)) {
             $validator = Validator::make($request->all(), [
-                "name" => "required",
+                "name" => "required|string",
             ]);
 
             if ($validator->fails()) {
@@ -57,7 +57,7 @@ class TagController extends Controller
         $tag = $this->validationObject(Tag::class, $id);
 
         $validator = Validator::make($request->all(), [
-            "name" => "required",
+            "name" => "required|string",
         ]);
 
         if ($validator->fails()) {

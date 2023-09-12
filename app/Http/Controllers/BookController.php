@@ -44,33 +44,25 @@ class BookController extends APIBaseController
      */
     public function create(Request $request)
     {
-        $checkbook = Book::where("description", $request->description)->get();
+        $validator = Validator::make($request->all(), [
+            "libelle" => "required|string",
+            "description" => "required|string",
+            "author_id" => "required|integer",
+        ]);
 
-        if (empty($checkbook->items)) {
-            $validator = Validator::make($request->all(), [
-                "libelle" => "required",
-                "description" => "required",
-                "author_id" => "required",
-            ]);
-
-            if ($validator->fails()) {
-                return $this->sendError("Validation Error, form incomplete .");
-            }
-
-            $author = $this->validationObject(
-                Author::class,
-                $request->author_id
-            );
-
-            $book = new Book();
-            $book->libelle = $request->libelle;
-            $book->description = $request->description;
-            $book->author()->associate($author);
-            $book->save();
-
-            return $this->sendResponse($book, "Book Created Successfully.");
+        if ($validator->fails()) {
+            return $this->sendError("Validation Error, form incomplete .");
         }
-        return $this->sendError("book are already exist.");
+
+        $author = $this->validationObject(Author::class, $request->author_id);
+
+        $book = new Book();
+        $book->libelle = $request->libelle;
+        $book->description = $request->description;
+        $book->author()->associate($author);
+        $book->save();
+
+        return $this->sendResponse($book, "Book Created Successfully.");
     }
 
     public function store($bookId, $tagId)
@@ -101,9 +93,9 @@ class BookController extends APIBaseController
         $book = $this->validationObject(Book::class, $id);
 
         $validator = Validator::make($request->all(), [
-            "libelle" => "required",
-            "description" => "required",
-            "author_id" => "required",
+            "libelle" => "required|string",
+            "description" => "required|string",
+            "author_id" => "required|integer",
         ]);
 
         if ($validator->fails()) {

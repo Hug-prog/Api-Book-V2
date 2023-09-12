@@ -30,7 +30,7 @@ class EditionController extends Controller
 
         if (empty($checkEdition->items)) {
             $validator = Validator::make($request->all(), [
-                "name" => "required",
+                "name" => "required|string",
             ]);
 
             if ($validator->fails()) {
@@ -58,7 +58,7 @@ class EditionController extends Controller
         $edition = $this->validationObject(Edition::class, $id);
 
         $validator = Validator::make($request->all(), [
-            "name" => "required",
+            "name" => "required|string",
         ]);
 
         if ($validator->fails()) {

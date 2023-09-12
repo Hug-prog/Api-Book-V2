@@ -30,7 +30,7 @@ class StatutController extends Controller
 
         if (empty($checkStatut->items)) {
             $validator = Validator::make($request->all(), [
-                "name" => "required",
+                "name" => "required|string",
             ]);
 
             if ($validator->fails()) {
@@ -58,7 +58,7 @@ class StatutController extends Controller
         );
 
         $validator = Validator::make($request->all(), [
-            "name" => "required",
+            "name" => "required|string",
         ]);
 
         if ($validator->fails()) {

@@ -63,9 +63,9 @@ class BookVersionController extends APIBaseController
     public function create(Request $request)
     {
         $validator = Validator::make($request->all(), [
-            "book_id" => "required",
-            "edition_id" => "required",
-            "publisher_id" => "required",
+            "book_id" => "required|integer",
+            "edition_id" => "required|integer",
+            "publisher_id" => "required|integer",
         ]);
 
         if ($validator->fails()) {

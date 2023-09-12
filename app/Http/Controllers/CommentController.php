@@ -20,10 +20,10 @@ class CommentController extends APIBaseController
         $comment = new Comment();
 
         $validator = Validator::make($request->all(), [
-            "book_version_id" => "required",
-            "user_id" => "required",
-            "note" => "required",
-            "comment" => "required",
+            "book_version_id" => "required|integer",
+            "user_id" => "required|integer",
+            "note" => "required|string",
+            "comment" => "required|string",
         ]);
         if ($validator->fails()) {
             return $this->sendError("Validation Error, form incomplete .");
@@ -69,8 +69,8 @@ class CommentController extends APIBaseController
         )->get();
 
         $validator = Validator::make($request->all(), [
-            "note" => "required",
-            "comment" => "required",
+            "note" => "required|string",
+            "comment" => "required|string",
         ]);
 
         if ($validator->fails()) {

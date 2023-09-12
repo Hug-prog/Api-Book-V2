@@ -31,8 +31,8 @@ class AuthorController extends BaseController
 
         if (empty($checkAuthor->items)) {
             $validator = Validator::make($request->all(), [
-                "first_name" => "required",
-                "last_name" => "required",
+                "first_name" => "required|string",
+                "last_name" => "required|string",
             ]);
 
             if ($validator->fails()) {
@@ -58,8 +58,8 @@ class AuthorController extends BaseController
         $author = $this->validationObject(Author::class, $id);
 
         $validator = Validator::make($request->all(), [
-            "first_name" => "required",
-            "last_name" => "required",
+            "first_name" => "required|string",
+            "last_name" => "required|string",
         ]);
 
         if ($validator->fails()) {

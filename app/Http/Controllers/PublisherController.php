@@ -31,7 +31,7 @@ class PublisherController extends APIBaseController
 
         if (empty($checkPublisher->items)) {
             $validator = Validator::make($request->all(), [
-                "name" => "required",
+                "name" => "required|string",
             ]);
 
             if ($validator->fails()) {
@@ -59,7 +59,7 @@ class PublisherController extends APIBaseController
         $publisher = $this->validationObject(Publisher::class, $id);
 
         $validator = Validator::make($request->all(), [
-            "name" => "required",
+            "name" => "required|string",
         ]);
 
         if ($validator->fails()) {
