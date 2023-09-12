@@ -44,6 +44,12 @@ Route::get("/library/book/version/{bookVersionId}/info/{userId}", [
     "getInfoByBookVersion",
 ]);
 
+// instert book version in library
+Route::post("/library/{userId}/book/version/{bookVersionId}", [
+    LibraryController::class,
+    "store",
+]);
+
 //
 
 //
@@ -185,20 +191,6 @@ Route::group(["middleware" => ["auth:sanctum"]], function () {
     // ***************book version**********************
     // create book version
     Route::post("/book/version", [BookVersionController::class, "create"]);
-
-    //
-
-    //
-
-    //
-
-    // ***************library**********************
-
-    // instert book version in library
-    Route::post("/library/{userId}/book/version/{bookVersionId}", [
-        LibraryController::class,
-        "store",
-    ]);
 
     //
 
