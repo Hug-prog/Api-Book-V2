@@ -16,10 +16,10 @@ class AuthController extends APIBaseController
     public function register(Request $request)
     {
         $request->validate([
-            "name" => "required",
+            "name" => "required|string",
             "email" => "required|email",
-            "password" => "required",
-            "device_name" => "required",
+            "password" => "required|integer",
+            "device_name" => "required|string",
         ]);
 
         if (User::where("email", $request->email)->first()) {
@@ -38,10 +38,10 @@ class AuthController extends APIBaseController
     public function login(Request $request)
     {
         $validator = Validator::make($request->all(), [
-            "name" => "required",
+            "name" => "required|string",
             "email" => "required|email",
-            "password" => "required",
-            "device_name" => "required",
+            "password" => "required|integer",
+            "device_name" => "required|string",
         ]);
 
         if ($validator->fails()) {
