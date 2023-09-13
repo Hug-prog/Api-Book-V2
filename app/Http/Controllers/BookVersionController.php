@@ -10,6 +10,7 @@ use App\Models\Publisher;
 use App\Models\User;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class BookVersionController extends APIBaseController
 {
@@ -109,15 +110,11 @@ class BookVersionController extends APIBaseController
      */
     public function destroy(int $id)
     {
-        // $bookVersion = BookVersion::find($id);
+        $bookVersion = $this->validationObject(BookVersion::class, $id);
 
-        // if (is_null($bookVersion)) {
-        //     return $this->sendError("BookVersion not found.");
-        // }
-
-        // return $this->sendResponse(
-        //     $bookVersion->delete(),
-        //     "BookVersion deleted Successfully."
-        // );
+        return $this->sendResponse(
+            $bookVersion->delete(),
+            "BookVersion deleted Successfully."
+        );
     }
 }

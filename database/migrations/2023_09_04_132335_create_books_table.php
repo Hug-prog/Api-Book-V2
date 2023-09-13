@@ -15,7 +15,7 @@ return new class extends Migration {
             $table->timestamps();
             $table->string("libelle");
             $table->string("description");
-            $table->foreignId("author_id")->onDelete("cascade");
+            $table->foreignId("author_id");
         });
     }
 

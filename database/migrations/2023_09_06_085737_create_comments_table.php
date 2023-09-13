@@ -15,12 +15,9 @@ return new class extends Migration {
             $table->timestamps();
             $table->string("comment");
             $table->integer("note");
-            $table
-                ->foreignId("statut_id")
-                ->nullable()
-                ->onDelete("cascade");
+            $table->foreignId("statut_id")->nullable();
             $table->foreignId("user_id");
-            $table->foreignId("book_version_id")->onDelete("cascade");
+            $table->foreignId("book_version_id");
         });
     }
 

@@ -14,11 +14,11 @@ return new class extends Migration {
         Schema::create("book_versions", function (Blueprint $table) {
             $table->id();
 
-            $table->foreignId("publisher_id")->onDelete("cascade");
+            $table->foreignId("publisher_id");
 
-            $table->foreignId("edition_id")->onDelete("cascade");
+            $table->foreignId("edition_id");
 
-            $table->foreignId("book_id")->onDelete("cascade");
+            $table->foreignId("book_id");
 
             $table->timestamps();
         });
