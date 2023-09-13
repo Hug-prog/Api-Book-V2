@@ -15,43 +15,43 @@ use App\Http\Controllers\TagController;
 // *****************************************************
 
 // ***************Auth**********************
-include "../routes/public/Auth.php";
+@include "../routes/public/Auth.php";
 //
 
 // ***************library**********************
-include "../routes/public/library.php";
+@include "../routes/public/library.php";
 //
 
 // ***************book version**********************
-include "../routes/public/BookVersion.php";
+@include "../routes/public/BookVersion.php";
 //
 
 // ***************comment**********************
-include "../routes/public/Comment.php";
+@include "../routes/public/Comment.php";
 //
 
 // ***************book**********************
-include "../routes/public/Book.php";
+@include "../routes/public/Book.php";
 //
 
 // ***************tag**********************
-include "../routes/public/Tag.php";
+@include "../routes/public/Tag.php";
 //
 
 // ***************Author**********************
-include "../routes/public/Author.php";
+@include "../routes/public/Author.php";
 //
 
 // ***************statut**********************
-include "../routes/public/Statut.php";
+@include "../routes/public/Statut.php";
 //
 
 // ***************publisher**********************
-include "../routes/public/Publisher.php";
+@include "../routes/public/Publisher.php";
 //
 
 // ***************edition**********************
-include "../routes/public/Edition.php";
+@include "../routes/public/Edition.php";
 //
 
 // *****************************************************
@@ -60,30 +60,30 @@ include "../routes/public/Edition.php";
 
 Route::group(["middleware" => ["auth:sanctum"]], function () {
     // ***************book version**********************
-    include "../routes/private/BookVersion.php";
+    @include "../routes/private/BookVersion.php";
     //
 
     // ***************book**********************
-    include "../routes/private/Book.php";
+    @include "../routes/private/Book.php";
     //
 
     // ***************tag**********************
-    include "../routes/private/Tag.php";
+    @include "../routes/private/Tag.php";
     //
 
     // ***************Author**********************
-    include "../routes/private/Author.php";
+    @include "../routes/private/Author.php";
     //
 
     // ***************statut**********************
-    include "../routes/private/Statut.php";
+    @include "../routes/private/Statut.php";
     //
 
     // ***************publisher**********************
-    include "../routes/private/Publisher.php";
+    @include "../routes/private/Publisher.php";
     //
 
     // ***************edition**********************
-    include "../routes/private/Edition.php";
+    @include "../routes/private/Edition.php";
     //
 });
