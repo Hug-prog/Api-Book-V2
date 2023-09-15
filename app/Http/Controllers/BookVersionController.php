@@ -72,7 +72,7 @@ class BookVersionController extends APIBaseController
     public  function  getBestBookVersion()
     {
         $bookVersionsArray = [];
-        $bestMoy = ['bookVersionId'=>0,'moy'=>0];
+        $bestAvg = ['bookVersionId'=>0,'avg'=>0];
 
         $bookVersions =  BookVersion::query()
             ->hasNote()
@@ -80,17 +80,17 @@ class BookVersionController extends APIBaseController
             ->get();
 
         foreach ($bookVersions as $key => $bookVersion) {
-            $moy= $bookVersion->comments->avg('note');
-            array_push($bookVersionsArray,['bookVersionId'=>$bookVersion->id,'moy'=>$moy]);
+            $avg= $bookVersion->comments->avg('note');
+            array_push($bookVersionsArray,['bookVersionId'=>$bookVersion->id,'avg'=>$avg]);
 
         }
 
         foreach ($bookVersionsArray as $kay=>$value)
         {
-            if($value["moy"]>$bestMoy['moy'])
+            if($value["avg"]>$bestAvg['avg'])
             {
-                $bestMoy['moy'] = $value["moy"];
-                $bestMoy['bookVersionId'] = $value['bookVersionId'];
+                $bestAvg['avg'] = $value["avg"];
+                $bestAvg['bookVersionId'] = $value['bookVersionId'];
             }
         }
 
@@ -98,7 +98,7 @@ class BookVersionController extends APIBaseController
             "publisher",
             "book",
             "edition",
-        ])->find($bestMoy['bookVersionId']);
+        ])->find($bestAvg['bookVersionId']);
 
         return $this->sendResponse($theBestBookVersion, "Best bookVersion Successfully.");
     }
