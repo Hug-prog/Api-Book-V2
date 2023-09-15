@@ -56,8 +56,53 @@ class BookVersionController extends APIBaseController
             ->where("book_version_id", $id)
             ->get();
 
-        return $this->sendResponse($getall, "Successfully.");
+        return $this->sendResponse($getall, "Success.");
     }
+
+    public function getBestNote()
+    {
+        return $this->sendResponse(
+            BookVersion::query()
+                ->with('book')
+                ->bestRated(3)
+                ->get()
+            ,"Success");
+    }
+
+    public  function  getBestBookVersion()
+    {
+        $bookVersionsArray = [];
+        $bestMoy = ['bookVersionId'=>0,'moy'=>0];
+
+        $bookVersions =  BookVersion::query()
+            ->hasNote()
+            ->with(['comments'=>fn($q) => $q->select('book_version_id','note')])
+            ->get();
+
+        foreach ($bookVersions as $key => $bookVersion) {
+            $moy= $bookVersion->comments->avg('note');
+            array_push($bookVersionsArray,['bookVersionId'=>$bookVersion->id,'moy'=>$moy]);
+
+        }
+
+        foreach ($bookVersionsArray as $kay=>$value)
+        {
+            if($value["moy"]>$bestMoy['moy'])
+            {
+                $bestMoy['moy'] = $value["moy"];
+                $bestMoy['bookVersionId'] = $value['bookVersionId'];
+            }
+        }
+
+        $theBestBookVersion = BookVersion::with([
+            "publisher",
+            "book",
+            "edition",
+        ])->find($bestMoy['bookVersionId']);
+
+        return $this->sendResponse($theBestBookVersion, "Best bookVersion Successfully.");
+    }
+
     /**
      * Show the form for creating a new resource.
      */

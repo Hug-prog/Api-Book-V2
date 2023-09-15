@@ -33,4 +33,16 @@ class BookVersion extends Model
     {
         return $this->belongsToMany(User::class);
     }
+
+    public function scopeHasNote($query) {
+        return $query->whereHas('comments', fn($q) => $q->whereNotnull('note'));
+    }
+
+    public function scopeBestRated($query, $count = 3) {
+        return $query
+            ->hasNote()
+            ->withMax('comments', 'note')
+            ->orderByDesc('comments_max_note')
+            ->take($count);
+    }
 }

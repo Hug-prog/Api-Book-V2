@@ -19,3 +19,9 @@ Route::get("/book/version/{id}/comments", [
     BookVersionController::class,
     "getAllComments",
 ]);
+
+//get best Note
+Route::get('/book/version/max/note',[BookVersionController::class,'getBestNote']);
+
+//get best bookVersion
+Route::get('/best/book/version/',[BookVersionController::class,'getBestBookVersion']);
