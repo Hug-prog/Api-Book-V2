@@ -89,8 +89,7 @@ class BookVersionController extends APIBaseController
         {
             if($value["avg"]>$bestAvg['avg'])
             {
-                $bestAvg['avg'] = $value["avg"];
-                $bestAvg['bookVersionId'] = $value['bookVersionId'];
+                $bestAvg = $value;
             }
         }
 
