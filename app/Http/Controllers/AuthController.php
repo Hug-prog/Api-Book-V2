@@ -64,4 +64,9 @@ class AuthController extends APIBaseController
 
         return $this->sendResponse($token, "User Logged In Successfully.");
     }
+
+    public function logout()
+    {
+        return $this->sendResponse(Auth::user()->tokens()->delete(),"logout success");
+    }
 }

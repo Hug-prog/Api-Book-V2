@@ -59,6 +59,8 @@ use App\Http\Controllers\TagController;
 // *****************************************************
 
 Route::group(["middleware" => ["auth:sanctum"]], function () {
+    // ***************Auth**********************
+    @include "../routes/private/Auth.php";
     // ***************book version**********************
     @include "../routes/private/BookVersion.php";
     //
